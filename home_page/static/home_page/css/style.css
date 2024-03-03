@@ -1,0 +1,109 @@
+body {margin:0;}
+
+.main {
+  padding: 16px;
+  margin-top: 60px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Кнопка выпадающего списка */
+.dropbtn {
+  background-color: #333;
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 17px;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+/* Контейнер <div> - необходим для размещения выпадающего содержимого */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Выпадающее содержимое (скрыто по умолчанию) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  z-index: 1;
+  text-align:center;
+}
+
+/* Ссылки внутри выпадающего списка */
+.dropdown-content a {
+  color: black;
+  padding: 8px;
+  min-width: 120px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Изменение цвета выпадающих ссылок при наведении курсора */
+.dropdown-content a:hover {
+  background-color: #333;
+}
+
+/* Показать выпадающее меню при наведении курсора */
+.dropdown:hover .dropdown-content {
+  display: inline-block;
+  background-color: rgba(0,0,0,0.0)
+}
+
+/* Изменение цвета фона кнопки раскрывающегося списка при отображении содержимого раскрывающегося списка */
+.dropdown:hover .dropbtn {
+  background: #ddd;
+  color: black;
+}
+
+.btn {
+  background-color: #333;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+
+.menu-row {
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.menu-row a {
+  float: left;
+  display: inline-block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.menu-row a:hover {
+  background: #ddd;
+  color: black;
+}
+
+.teacher-panel {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  display: inline-block;
+    padding: 20px;
+}
+
+.teacher-photo {
+  display: inline-block;
+
+}
+
+
