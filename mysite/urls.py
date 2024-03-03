@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import include, path
-#from mysite.polls.views import page_not_found
+# from mysite.polls.views import page_not_found
 
 urlpatterns = [
     path("polls/", include("polls.urls")),
@@ -9,4 +9,4 @@ urlpatterns = [
     path("", include('home_page.urls')),
 ]
 
-#handler404 = page_not_found
+# handler404 = page_not_found

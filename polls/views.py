@@ -6,11 +6,12 @@ from django.urls import reverse
 from .models import Choice, Question
 from django.views import generic
 
+
 class IndexView(generic.ListView):
-    extra_context = {'title' : 'ИМЯ-ВЫМЯ'}
+    extra_context = {'title': 'ИМЯ-ВЫМЯ'}
     template_name = "polls/index.html"
     context_object_name = "latest_question_list"
-#
+
     def get_queryset(self):
         return Question.objects.filter(pub_date__lte=timezone.now()).exclude(choice=None).order_by("-pub_date")[:5]
 
@@ -19,6 +20,7 @@ class DetailView(generic.DetailView):
     model = Question
     template_name = "polls/detail.html"
     extra_context = {'title': 'ИМЯ-ВЫМЯ'}
+
     def get_queryset(self):
         """
         Excludes any questions that aren't published yet.
@@ -30,6 +32,7 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = "polls/results.html"
     extra_context = {'title': 'ИМЯ-ВЫМЯ'}
+
     def get_queryset(self):
         """
         Excludes any questions that aren't published yet.
@@ -37,12 +40,14 @@ class ResultsView(generic.DetailView):
         return Question.objects.filter(pub_date__lte=timezone.now())
 
 
-def vote(request, question_id):
+def vote(question_id):
     return HttpResponse("You're voting on question %s." % question_id)
 
-def print_year(request, year):
+
+def print_year(year):
     now = datetime.datetime.now()
     return HttpResponse("You chose year ", year, "and time - ", now)
+
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
@@ -66,5 +71,6 @@ def vote(request, question_id):
         # user hits the Back button.
         return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
 
-def page_not_found(request, exception):
+
+def page_not_found():
     return HttpResponseNotFound('<h1>Страница не найдена</h1>')
