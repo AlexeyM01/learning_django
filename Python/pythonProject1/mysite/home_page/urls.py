@@ -3,7 +3,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 
-#app_name = "home_page"
+# app_name = "home_page"
 from .views import *
 
 urlpatterns = [
@@ -21,8 +21,8 @@ urlpatterns = [
     path("account", views.account, name='account'),
     # ex: /translation
     path("translation", views.translation, name='translation'),
-    # ex: /curces
-    path("curces", views.curces, name='curces'),
+    # ex: /curses
+    path("curses", views.curces, name='curses'),
     # ex: /about_us
     path("about_us", views.about_us, name='about_us'),
     # ex: /login
@@ -32,6 +32,6 @@ urlpatterns = [
 
 
     # ex: /temp_fun
-#    path("temp_fun", views.temp_fun, name='temp'),
+    # path("temp_fun", views.temp_fun, name='temp'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-#+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

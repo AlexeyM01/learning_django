@@ -12,15 +12,14 @@ body {margin:0;}
 /* Кнопка выпадающего списка */
 .dropbtn {
   background-color: #333;
-  border: none;
-  float: left;
   display: block;
-  color: #f2f2f2;
+  color: white;
   text-align: center;
-  padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
-
+  padding: 16px;
+  font-size: 16px;
+  border: none;
 }
 
 /* Контейнер <div> - необходим для размещения выпадающего содержимого */
@@ -55,7 +54,7 @@ body {margin:0;}
 
 /* Показать выпадающее меню при наведении курсора */
 .dropdown:hover .dropdown-content {
-  display: block;
+  display: inline-block;
   background-color: rgba(0,0,0,0.0)
 }
 

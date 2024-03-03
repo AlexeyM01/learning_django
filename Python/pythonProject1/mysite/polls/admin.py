@@ -7,6 +7,7 @@ class ChoiceInline(admin.TabularInline):
     model = Choice
     extra = 1
 
+
 class QuestionAdmin(admin.ModelAdmin):
     fieldsets = [
         ("BASIC INFO", {"fields": ["question_text"]}),
@@ -14,6 +15,7 @@ class QuestionAdmin(admin.ModelAdmin):
     ]
     inlines = [ChoiceInline]
     list_display = ["question_text", "pub_date"]
+
 
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Choice)
