@@ -32,7 +32,6 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 INSTALLED_APPS = [
     "home_page.apps.HomePageConfig",
-    "products.apps.ProductsConfig",
     "polls.apps.PollsConfig",
     'django.contrib.admin',
     'django.contrib.auth',

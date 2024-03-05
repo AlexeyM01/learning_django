@@ -8,21 +8,21 @@ from .views import *
 
 urlpatterns = [
     # ex: /
-    path('', views.home_page_view, name='home'),
+    path('', HomePageView.as_view(), name='home'),
 
     # ex: /teachers
-    path("teachers", show_teachers.as_view(), name='teachers',),
+    path("teachers", show_teachers.as_view(), name='teachers'),
     # ex: /add_teacher
-    path("add_teacher", views.add_teacher, name='add_teacher',),
+    path("add_teacher", AddTeacher.as_view(), name='add_teacher'),
     # ex: /teachers/anastasia_linenko
-    path("teacher/<slug:teacher_slug>", views.show_teacher, name='teacher'),
+    path("teacher/<slug:teacher_slug>", ShowTeacher.as_view(), name='teacher'),
 
     # ex: /account
     path("account", views.account, name='account'),
     # ex: /translation
     path("translation", views.translation, name='translation'),
     # ex: /curses
-    path("curses", views.curces, name='curses'),
+    path("curses", views.curses, name='curses'),
     # ex: /about_us
     path("about_us", views.about_us, name='about_us'),
     # ex: /login
