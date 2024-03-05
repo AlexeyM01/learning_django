@@ -1,5 +1,5 @@
 from django import template
-
+from django.core.paginator import Paginator
 from home_page.models import *
 
 register = template.Library()
@@ -17,14 +17,13 @@ def get_teachers(sort=None, gte=None):
     all_teachers_list = Teacher.objects.all()
     if sort:
         all_teachers_list = all_teachers_list.order_by(sort)
-    if not gte:
-        return all_teachers_list
-    else:
-        return all_teachers_list.filter(rating__gte=gte)
+    if gte:
+        all_teachers_list = all_teachers_list.filter(rating__gte=gte)
+    return all_teachers_list
 
 
 @register.inclusion_tag('home_page/temp.html')
 def show_teachers(sort=None, gte=0):
     """Возвращает список преподавателей с выбранным типом сортировки и персональным рейтингом"""
     teachers_list = get_teachers(sort=sort, gte=gte)
-    return {"list": teachers_list}
+    return {"teachers_list": teachers_list}

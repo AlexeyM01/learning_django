@@ -1,15 +1,9 @@
 <div class="container">
-{% for t in list %}
+{% for t in page_obj %}
     <div class="teacher-panel">
-        {% if t.photo %}
-            <div class="teacher-photo"> <img class="img-article-left thumb" src="{{t.photo.url}}"> </div>
-        {% endif %}
         <h4> {{t.name}} </h4>
         <p> Краткая информация: {{t.brief_info|truncatewords:50}} </p>
-        <p> Опыт: {{t.experience}} </p>
         <p class="link-read-post"><a href="{{ t.get_absolute_url }}">Подробнее</a></p>
-
-
     </div>
 {% endfor %}
 </div>

@@ -10,6 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class show_teachers(DataMixin, ListView):
     """Класс страницы показа всех преподавателей на базе шаблона teachers.html"""
     model = Teacher
+    paginate_by = 3
     template_name = 'home_page/teachers.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -19,7 +20,7 @@ class show_teachers(DataMixin, ListView):
 
     def get_queryset(self):
         """Функция возврата списка преподавателей"""
-        return Teacher
+        return Teacher.objects.all()
 
 class HomePageView(DataMixin, ListView):
     template_name = 'home_page/homepage.html'
@@ -29,7 +30,8 @@ class HomePageView(DataMixin, ListView):
         c_def = self.get_user_context(title="KOREANA")
         return dict(list(context.items()) + list(c_def.items()))
 
-    def get_queryset(self):
+    @staticmethod
+    def get_queryset():
         """Функция возврата списка преподавателей"""
         return Teacher
 

@@ -16,9 +16,43 @@
     </select>
     <input type="submit" value="Сортировать">
     </form>
-
 </div>
+<div class="container">
+{% for t in page_obj %}
+    <div class="teacher-panel">
+        <h4> {{t.name}} </h4>
+        <p> Краткая информация: {{t.brief_info|truncatewords:50}} </p>
+        <p class="link-read-post"><a href="{{ t.get_absolute_url }}">Подробнее</a></p>
+    </div>
+{% endfor %}
+</div>
+{% if page_obj.has_other_pages %}
+    <nav class="list-pages">
+    <ul>
+    {% if page_obj.has_previous %}
+        <li class="page-num">
+	        <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+        </li>
+    {% endif %}
+    {% for p in paginator.page_range %}
+		{% if page_obj.number == p %}
+            <li class="page-num page-num-selected">{{ p }}</li>
+		{% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2  %}
+        <li class="page-num">
+            <a href="?page={{ p }}">{{ p }}</a>
+        </li>
+		{% endif %}
+    {% endfor %}
 
-{% show_teachers sort=sort %}
+    {% if page_obj.has_next %}
+        <li class="page-num">
+	        <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
+        </li>
+    {% endif %}
+
+    </ul>
+</nav>
+
+{% endif %}
 
 {% endblock content %}
