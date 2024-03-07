@@ -1,13 +1,17 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView, DetailView, CreateView
+from django.urls import reverse_lazy
+from django.core.paginator import Paginator
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from .forms import *
 from .models import *
 from .utils import *
-from django.views.generic import ListView, DetailView, CreateView
-from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
 
-class show_teachers(DataMixin, ListView):
+class ShowAllTeachers(DataMixin, ListView):
     """Класс страницы показа всех преподавателей на базе шаблона teachers.html"""
     model = Teacher
     paginate_by = 3
@@ -64,11 +68,6 @@ class AddTeacher(LoginRequiredMixin, DataMixin, CreateView):
 
 
 
-def account(request):
-    """Функция-затычка, которая просто отображает страницу входа"""
-    return HttpResponse('Здесь будет вход')
-
-
 def translation(request):
     """Функция-затычка, которая просто отображает страницу переводов"""
     return HttpResponse('Здесь будет перевод')
@@ -84,11 +83,30 @@ def about_us(request):
     return HttpResponse('Здесь будет информация о нас')
 
 
-def login(request):
-    """Функция-затычка, которая просто отображает страницу входа"""
-    return HttpResponse('Здесь будет окно входа в аккаунт')
+class LoginUser(DataMixin, LoginView):
+    form_class = AuthenticationForm
+    template_name = 'home_page/login.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title="Авторизация")
+        return dict(list(context.items()) + list(c_def.items()))
+
+    def get_success_url(self):
+        return reverse_lazy('home')
 
 
-def registration(request):
-    """Функция-затычка, которая просто отображает страницу регистрации"""
-    return HttpResponse('Здесь будет окно регистрации')
+
+class UserRegistration(DataMixin, CreateView):
+    form_class = UserCreationForm
+    template_name = 'home_page/user_registration.html'
+    success_url = reverse_lazy('login')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title="Регистрация")
+        return dict(list(context.items()) + list(c_def.items()))
+
+def logout_user(request):
+    logout(request)
+    return redirect('login')

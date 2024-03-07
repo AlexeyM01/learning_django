@@ -15,12 +15,12 @@
         {% for m in main_menu %}
             <button class="btn" type="button"> <a href="{% url m.url_name %}">{{m.title}}</a> </button>
         {% endfor %}
-        <div class="dropdown">
-            <button class="dropbtn">Учётная запись</button>
-            <div class="dropdown-content">
-                <button class="btn" type="button"> <a href="{% url 'login' %}">Вход</a> </button>
-                <button class="btn" type="button"> <a href="{% url 'registration' %}">Регистрация</a> </button>
-            </div>
+        {% if request.user.is_authenticated %}
+        <li class="btn"><a href="{% url 'logout' %}">{{user.username}} | Выйти</a></li>
+        {% else %}
+        <li class="btn"><a href="{% url 'registration' %}">Регистрация</a>
+        <li class="btn"><a href="{% url 'login' %}">Войти</a>
+        {% endif %}
         </div>
     </div>
 {%endblock mainmenu %}
